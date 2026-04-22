@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="hi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>केशव का डेवलपर रोडमैप</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Noto Sans Devanagari', sans-serif;
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { text-align: center; margin-bottom: 10px; font-size: 1.8em; }
+        .subtitle { text-align: center; color: #a5b4fc; margin-bottom: 30px; font-size: 0.95em; }
+        .day-counter {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .task-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        .task-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .java { background: #f97316; }
+        .flutter { background: #06b6d4; }
+        .sql { background: #3b82f6; }
+        h3 { font-size: 1.1em; }
+        .topic { color: #cbd5e1; font-size: 0.95em; margin: 8px 0; }
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        a {
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        .video { background: #ef4444; color: white; }
+        .practice { background: rgba(255,255,255,0.1); color: #cbd5e1; }
+        .progress {
+            background: rgba(255,255,255,0.1);
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #10b981, #22c55e);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        button {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        button:hover { background: #059669; }
+        .completed { opacity: 0.6; }
+        .completed .topic { text-decoration: line-through; }
+        .lang-switch {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .lang-switch a {
+            background: rgba(255,255,255,0.1);
+            color: white;
+            margin: 0 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="lang-switch">
+            <a href="simple.html">English</a>
+            <a href="hindi.html" style="background:#6366f1">हिंदी</a>
+        </div>
+
+        <h1>केशव का डेवलपर रोडमैप</h1>
+        <p class="subtitle">जावा + फ्लटर + एसक्यूएल - एक साथ सीखें!</p>
+        
+        <div class="day-counter">
+            <strong>दिन <span id="currentDay">1</span></strong> / 365 दिन
+            <br><small>रोज़ 3 काम पूरे करें (हर एक 1 घंटा)</small>
+        </div>
+
+        <!-- Java Task -->
+        <div class="task-card" id="java-task">
+            <div class="task-header">
+                <div class="icon java">📚</div>
+                <div>
+                    <h3>जावा (1 घंटा)</h3>
+                    <small style="color:#f97316">कुणाल कुशवाहा (हिंदी)</small>
+                </div>
+            </div>
+            <p class="topic" id="java-topic">जावा इंस्टॉलेशन और पहला प्रोग्राम</p>
+            <div class="actions">
+                <a href="https://www.youtube.com/playlist?list=PL9gnSGHSqcnr_B7KpS3j_JQlaedHL9zP1" target="_blank" class="video">▶ वीडियो देखें</a>
+                <span class="practice">अभ्यास: Hello World लिखें</span>
+            </div>
+            <button onclick="toggleComplete('java')">✓ पूरा किया</button>
+        </div>
+
+        <!-- Flutter Task -->
+        <div class="task-card" id="flutter-task">
+            <div class="task-header">
+                <div class="icon flutter">📱</div>
+                <div>
+                    <h3>फ्लटर (1 घंटा)</h3>
+                    <small style="color:#06b6d4">हितेश चौधरी (हिंदी)</small>
+                </div>
+            </div>
+            <p class="topic" id="flutter-topic">फ्लटर इंस्टॉलेशन और सेटअप</p>
+            <div class="actions">
+                <a href="https://www.youtube.com/playlist?list=PLRAV98dHFLQOEOE6hC0_0XyO2Z3_1b4dF" target="_blank" class="video">▶ वीडियो देखें</a>
+                <span class="practice">अभ्यास: flutter doctor चलाएं</span>
+            </div>
+            <button onclick="toggleComplete('flutter')">✓ पूरा किया</button>
+        </div>
+
+        <!-- SQL Task -->
+        <div class="task-card" id="sql-task">
+            <div class="task-header">
+                <div class="icon sql">🗄️</div>
+                <div>
+                    <h3>एसक्यूएल (1 घंटा)</h3>
+                    <small style="color:#3b82f6">कोडविदहैरी (हिंदी)</small>
+                </div>
+            </div>
+            <p class="topic" id="sql-topic">माईएसक्यूएल इंस्टॉलेशन और बेसिक्स</p>
+            <div class="actions">
+                <a href="https://www.youtube.com/playlist?list=PLu0W_9lII9agS67Uits0UnJyrYiXhDS6q" target="_blank" class="video">▶ वीडियो देखें</a>
+                <span class="practice">अभ्यास: पहला डेटाबेस बनाएं</span>
+            </div>
+            <button onclick="toggleComplete('sql')">✓ पूरा किया</button>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <p style="text-align:center; margin-top:10px; color:#94a3b8">
+            प्रगति: <span id="completedCount">0</span>/3 काम आज
+        </p>
+
+        <!-- Quick Links -->
+        <div style="margin-top:30px; padding:15px; background:rgba(255,255,255,0.05); border-radius:12px;">
+            <h3 style="margin-bottom:15px; font-size:1em;">यूट्यूब चैनल</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:10px;">
+                <a href="https://www.youtube.com/@KunalKushwaha" target="_blank" style="background:#ef4444; padding:8px 12px; font-size:0.8em;">कुणाल कुशवाहा (जावा)</a>
+                <a href="https://www.youtube.com/@HiteshChoudharydotcom" target="_blank" style="background:#06b6d4; padding:8px 12px; font-size:0.8em;">हितेश चौधरी (फ्लटर)</a>
+                <a href="https://www.youtube.com/@CodeWithHarry" target="_blank" style="background:#3b82f6; padding:8px 12px; font-size:0.8em;">कोडविदहैरी (एसक्यूएल)</a>
+            </div>
+        </div>
+
+        <!-- Instructions -->
+        <div style="margin-top:20px; padding:15px; background:rgba(255,255,255,0.03); border-radius:12px; font-size:0.9em;">
+            <h4 style="color:#a5b4fc; margin-bottom:10px;">🎯 कैसे इस्तेमाल करें:</h4>
+            <ul style="color:#cbd5e1; padding-left:20px; line-height:1.8;">
+                <li>हर दिन 3 काम करें - जावा, फ्लटर, एसक्यूएल</li>
+                <li>हर विषय के लिए 1 घंटा निकालें</li>
+                <li>वीडियो देखें और साथ-साथ प्रैक्टिस करें</li>
+                <li>"पूरा किया" बटन दबाएं जब काम हो जाए</li>
+                <li>Arrow keys ← → से दिन बदल सकते हैं (टेस्टिंग के लिए)</li>
+            </ul>
+        </div>
+    </div>
+
+    <script>
+        // Daily tasks data in Hindi
+        const dailyTasks = {
+            1: {
+                java: { topic: 'जावा इंस्टॉलेशन और पहला प्रोग्राम', video: 'https://www.youtube.com/playlist?list=PL9gnSGHSqcnr_B7KpS3j_JQlaedHL9zP1', practice: 'Hello World लिखें' },
+                flutter: { topic: 'फ्लटर इंस्टॉलेशन और सेटअप', video: 'https://www.youtube.com/playlist?list=PLRAV98dHFLQOEOE6hC0_0XyO2Z3_1b4dF', practice: 'flutter doctor चलाएं' },
+                sql: { topic: 'माईएसक्यूएल इंस्टॉलेशन और बेसिक्स', video: 'https://www.youtube.com/playlist?list=PLu0W_9lII9agS67Uits0UnJyrYiXhDS6q', practice: 'पहला डेटाबेस बनाएं' }
+            },
+            2: {
+                java: { topic: 'वेरिएबल्स और डेटा टाइप्स', video: 'https://www.youtube.com/playlist?list=PL9gnSGHSqcnr_B7KpS3j_JQlaedHL9zP1', practice: 'अलग-अलग टाइप्स बनाएं' },
+                flutter: { topic: 'डार्ट बेसिक्स - वेरिएबल्स', video: 'https://www.youtube.com/playlist?list=PLRAV98dHFLQOEOE6hC0_0XyO2Z3_1b4dF', practice: 'डार्ट में वेरिएबल्स बनाएं' },
+                sql: { topic: 'CREATE TABLE और डेटा टाइप्स', video: 'https://www.youtube.com/playlist?list=PLu0W_9lII9agS67Uits0UnJyrYiXhDS6q', practice: 'स्टूडेंट टेबल बनाएं' }
+            },
+            3: {
+                java: { topic: 'ऑपरेटर्स इन जावा', video: 'https://www.youtube.com/playlist?list=PL9gnSGHSqcnr_B7KpS3j_JQlaedHL9zP1', practice: 'कैलकुलेटर बनाएं' },
+                flutter: { topic: 'फ्लटर विजेट्स इंट्रो', video: 'https://www.youtube.com/playlist?list=PLRAV98dHFLQOEOE6hC0_0XyO2Z3_1b4dF', practice: 'कंटेनर विजेट बनाएं' },
+                sql: { topic: 'INSERT INTO स्टेटमेंट', video: 'https://www.youtube.com/playlist?list=PLu0W_9lII9agS67Uits0UnJyrYiXhDS6q', practice: '5 रिकॉर्ड्स डालें' }
+            },
+            4: {
+                java: { topic: 'If-Else स्टेटमेंट्स', video: 'https://www.youtube.com/playlist?list=PL9gnSGHSqcnr_B7KpS3j_JQlaedHL9zP1', practice: 'नंबर गेस गेम' },
+                flutter: { topic: 'टेक्स्ट और बटन विजेट्स', video: 'https://www.youtube.com/playlist?list=PLRAV98dHFLQOEOE6hC0_0XyO2Z3_1b4dF', practice: 'लॉगिन UI बनाएं' },
+                sql: { topic: 'SELECT स्टेटमेंट', video: 'https://www.youtube.com/playlist?list=PLu0W_9lII9agS67Uits0UnJyrYiXhDS6q', practice: 'सारे रिकॉर्ड्स देखें' }
+            },
+            5: {
+                java: { topic: 'Switch Case', video: 'https://www.youtube.com/playlist?list=PL9gnSGHSqcnr_B7KpS3j_JQlaedHL9zP1', practice: 'दिन कैलकुलेटर' },
+                flutter: { topic: 'Row और Column Layouts', video: 'https://www.youtube.com/playlist?list=PLRAV98dHFLQOEOE6hC0_0XyO2Z3_1b4dF', practice: 'प्रोफाइल लेआउट' },
+                sql: { topic: 'WHERE क्लॉज', video: 'https://www.youtube.com/playlist?list=PLu0W_9lII9agS67Uits0UnJyrYiXhDS6q', practice: 'फिल्टर करें' }
+            }
+        };
+
+        // Load saved progress
+        let currentDay = 1;
+        let completed = { java: false, flutter: false, sql: false };
+        
+        const saved = localStorage.getItem('keshavProgressHindi');
+        if (saved) {
+            const data = JSON.parse(saved);
+            currentDay = data.day || 1;
+            completed = data.completed || { java: false, flutter: false, sql: false };
+        }
+
+        // Set current day
+        document.getElementById('currentDay').textContent = currentDay;
+
+        // Load tasks for current day
+        const tasks = dailyTasks[currentDay] || dailyTasks[1];
+        document.getElementById('java-topic').textContent = tasks.java.topic;
+        document.getElementById('flutter-topic').textContent = tasks.flutter.topic;
+        document.getElementById('sql-topic').textContent = tasks.sql.topic;
+        
+        // Update video links
+        document.querySelector('#java-task .video').href = tasks.java.video;
+        document.querySelector('#flutter-task .video').href = tasks.flutter.video;
+        document.querySelector('#sql-task .video').href = tasks.sql.video;
+        
+        // Update practice text
+        document.querySelector('#java-task .practice').textContent = 'अभ्यास: ' + tasks.java.practice;
+        document.querySelector('#flutter-task .practice').textContent = 'अभ्यास: ' + tasks.flutter.practice;
+        document.querySelector('#sql-task .practice').textContent = 'अभ्यास: ' + tasks.sql.practice;
+
+        // Apply saved completion status
+        updateUI();
+
+        function toggleComplete(task) {
+            completed[task] = !completed[task];
+            saveProgress();
+            updateUI();
+        }
+
+        function saveProgress() {
+            localStorage.setItem('keshavProgressHindi', JSON.stringify({
+                day: currentDay,
+                completed: completed,
+                lastActive: new Date().toISOString()
+            }));
+        }
+
+        function updateUI() {
+            const count = Object.values(completed).filter(v => v).length;
+            document.getElementById('completedCount').textContent = count;
+            document.getElementById('progressBar').style.width = (count / 3 * 100) + '%';
+            
+            ['java', 'flutter', 'sql'].forEach(task => {
+                const card = document.getElementById(task + '-task');
+                if (completed[task]) {
+                    card.classList.add('completed');
+                    card.querySelector('button').textContent = '✓ पूरा हुआ';
+                    card.querySelector('button').style.background = '#059669';
+                } else {
+                    card.classList.remove('completed');
+                    card.querySelector('button').textContent = '✓ पूरा किया';
+                    card.querySelector('button').style.background = '#10b981';
+                }
+            });
+        }
+
+        // Navigation to change day (for testing)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentDay < 5) {
+                currentDay++;
+                completed = { java: false, flutter: false, sql: false };
+                location.reload();
+            } else if (e.key === 'ArrowLeft' && currentDay > 1) {
+                currentDay--;
+                completed = { java: false, flutter: false, sql: false };
+                location.reload();
+            }
+        });
+    </script>
+</body>
+</html>
