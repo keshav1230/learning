@@ -1,0 +1,284 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Keshav's Daily Learning</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #1e1b4b 0%, #312e81 100%);
+            min-height: 100vh;
+            color: white;
+            padding: 20px;
+        }
+        .container { max-width: 800px; margin: 0 auto; }
+        h1 { text-align: center; margin-bottom: 10px; font-size: 2em; }
+        .subtitle { text-align: center; color: #a5b4fc; margin-bottom: 30px; }
+        .day-counter {
+            background: rgba(255,255,255,0.1);
+            padding: 15px;
+            border-radius: 12px;
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .task-card {
+            background: rgba(255,255,255,0.05);
+            border: 1px solid rgba(255,255,255,0.1);
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 15px;
+        }
+        .task-header {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            margin-bottom: 10px;
+        }
+        .icon {
+            width: 40px;
+            height: 40px;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 20px;
+        }
+        .java { background: #f97316; }
+        .flutter { background: #06b6d4; }
+        .sql { background: #3b82f6; }
+        h3 { font-size: 1.1em; }
+        .topic { color: #cbd5e1; font-size: 0.95em; margin: 8px 0; }
+        .actions {
+            display: flex;
+            gap: 10px;
+            flex-wrap: wrap;
+        }
+        a {
+            padding: 8px 16px;
+            border-radius: 6px;
+            text-decoration: none;
+            font-size: 0.85em;
+            font-weight: 500;
+        }
+        .video { background: #ef4444; color: white; }
+        .practice { background: rgba(255,255,255,0.1); color: #cbd5e1; }
+        .progress {
+            background: rgba(255,255,255,0.1);
+            height: 8px;
+            border-radius: 4px;
+            margin-top: 20px;
+            overflow: hidden;
+        }
+        .progress-bar {
+            background: linear-gradient(90deg, #10b981, #22c55e);
+            height: 100%;
+            width: 0%;
+            transition: width 0.3s;
+        }
+        button {
+            background: #10b981;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 6px;
+            cursor: pointer;
+            font-size: 0.9em;
+            margin-top: 10px;
+        }
+        button:hover { background: #059669; }
+        .completed { opacity: 0.6; }
+        .completed .topic { text-decoration: line-through; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Keshav's Developer Journey</h1>
+        <p class="subtitle">Java + Flutter + SQL - Learn together daily!</p>
+        
+        <div class="day-counter">
+            <strong>Day <span id="currentDay">1</span></strong> / 365 days
+            <br><small>Complete 3 tasks daily (1 hour each)</small>
+        </div>
+
+        <!-- Java Task -->
+        <div class="task-card" id="java-task">
+            <div class="task-header">
+                <div class="icon java">📚</div>
+                <div>
+                    <h3>Java (1 hour)</h3>
+                    <small style="color:#f97316">Programming Fundamentals</small>
+                </div>
+            </div>
+            <p class="topic" id="java-topic">Java Installation & First Program</p>
+            <div class="actions">
+                <a href="https://www.youtube.com/watch?v=7WkY3sQ7U9c" target="_blank" class="video">▶ Watch Video</a>
+                <span class="practice">Practice: Write Hello World</span>
+            </div>
+            <button onclick="toggleComplete('java')">✓ Mark Complete</button>
+        </div>
+
+        <!-- Flutter Task -->
+        <div class="task-card" id="flutter-task">
+            <div class="task-header">
+                <div class="icon flutter">📱</div>
+                <div>
+                    <h3>Flutter (1 hour)</h3>
+                    <small style="color:#06b6d4">Mobile Development</small>
+                </div>
+            </div>
+            <p class="topic" id="flutter-topic">Flutter Installation & Setup</p>
+            <div class="actions">
+                <a href="https://www.youtube.com/watch?v=VPvVD8t02U8" target="_blank" class="video">▶ Watch Video</a>
+                <span class="practice">Practice: Run flutter doctor</span>
+            </div>
+            <button onclick="toggleComplete('flutter')">✓ Mark Complete</button>
+        </div>
+
+        <!-- SQL Task -->
+        <div class="task-card" id="sql-task">
+            <div class="task-header">
+                <div class="icon sql">🗄️</div>
+                <div>
+                    <h3>SQL (1 hour)</h3>
+                    <small style="color:#3b82f6">Database Management</small>
+                </div>
+            </div>
+            <p class="topic" id="sql-topic">MySQL Installation & Basics</p>
+            <div class="actions">
+                <a href="https://www.youtube.com/watch?v=7S_tz1z_5bA" target="_blank" class="video">▶ Watch Video</a>
+                <span class="practice">Practice: Create first database</span>
+            </div>
+            <button onclick="toggleComplete('sql')">✓ Mark Complete</button>
+        </div>
+
+        <div class="progress">
+            <div class="progress-bar" id="progressBar"></div>
+        </div>
+        <p style="text-align:center; margin-top:10px; color:#94a3b8">
+            Progress: <span id="completedCount">0</span>/3 tasks today
+        </p>
+
+        <!-- Quick Links -->
+        <div style="margin-top:30px; padding:15px; background:rgba(255,255,255,0.05); border-radius:12px;">
+            <h3 style="margin-bottom:15px; font-size:1em;">Quick Resources</h3>
+            <div style="display:flex; flex-wrap:wrap; gap:10px;">
+                <a href="https://www.youtube.com/@KunalKushwaha" target="_blank" style="background:#ef4444; padding:8px 12px; font-size:0.8em;">Kunal Kushwaha (Java)</a>
+                <a href="https://www.youtube.com/@HiteshChoudharydotcom" target="_blank" style="background:#06b6d4; padding:8px 12px; font-size:0.8em;">Hitesh Choudhary (Flutter)</a>
+                <a href="https://www.youtube.com/@CodeWithHarry" target="_blank" style="background:#3b82f6; padding:8px 12px; font-size:0.8em;">CodeWithHarry (SQL)</a>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        // Daily tasks data for first 5 days
+        const dailyTasks = {
+            1: {
+                java: { topic: 'Java Installation & First Program', video: 'https://www.youtube.com/watch?v=7WkY3sQ7U9c', practice: 'Write Hello World' },
+                flutter: { topic: 'Flutter Installation & Setup', video: 'https://www.youtube.com/watch?v=VPvVD8t02U8', practice: 'Run flutter doctor' },
+                sql: { topic: 'MySQL Installation & Basics', video: 'https://www.youtube.com/watch?v=7S_tz1z_5bA', practice: 'Create first database' }
+            },
+            2: {
+                java: { topic: 'Variables & Data Types', video: 'https://www.youtube.com/watch?v=S0uU2TqO7ZE', practice: 'Declare different types' },
+                flutter: { topic: 'Dart Basics - Variables', video: 'https://www.youtube.com/watch?v=S0uU2TqO7ZE', practice: 'Create variables in Dart' },
+                sql: { topic: 'CREATE TABLE & Data Types', video: 'https://www.youtube.com/watch?v=7S_tz1z_5bA&t=300', practice: 'Create student table' }
+            },
+            3: {
+                java: { topic: 'Operators in Java', video: 'https://www.youtube.com/watch?v=S0uU2TqO7ZE&t=900', practice: 'Build calculator' },
+                flutter: { topic: 'Flutter Widgets Intro', video: 'https://www.youtube.com/watch?v=VPvVD8t02U8&t=600', practice: 'Create Container' },
+                sql: { topic: 'INSERT INTO Statement', video: 'https://www.youtube.com/watch?v=7S_tz1z_5bA&t=600', practice: 'Insert 5 records' }
+            },
+            4: {
+                java: { topic: 'If-Else Statements', video: 'https://www.youtube.com/watch?v=S0uU2TqO7ZE&t=1800', practice: 'Number guess game' },
+                flutter: { topic: 'Text & Button Widgets', video: 'https://www.youtube.com/watch?v=VPvVD8t02U8&t=1200', practice: 'Build login UI' },
+                sql: { topic: 'SELECT Statement', video: 'https://www.youtube.com/watch?v=7S_tz1z_5bA&t=900', practice: 'Query all records' }
+            },
+            5: {
+                java: { topic: 'Switch Case', video: 'https://www.youtube.com/watch?v=S0uU2TqO7ZE&t=2400', practice: 'Day calculator' },
+                flutter: { topic: 'Row & Column Layouts', video: 'https://www.youtube.com/watch?v=VPvVD8t02U8&t=1800', practice: 'Profile layout' },
+                sql: { topic: 'WHERE Clause', video: 'https://www.youtube.com/watch?v=7S_tz1z_5bA&t=1200', practice: 'Filter records' }
+            }
+        };
+
+        // Load saved progress
+        let currentDay = 1;
+        let completed = { java: false, flutter: false, sql: false };
+        
+        const saved = localStorage.getItem('keshavProgress');
+        if (saved) {
+            const data = JSON.parse(saved);
+            currentDay = data.day || 1;
+            completed = data.completed || { java: false, flutter: false, sql: false };
+        }
+
+        // Set current day
+        document.getElementById('currentDay').textContent = currentDay;
+
+        // Load tasks for current day
+        const tasks = dailyTasks[currentDay] || dailyTasks[1];
+        document.getElementById('java-topic').textContent = tasks.java.topic;
+        document.getElementById('flutter-topic').textContent = tasks.flutter.topic;
+        document.getElementById('sql-topic').textContent = tasks.sql.topic;
+        
+        // Update video links
+        document.querySelector('#java-task .video').href = tasks.java.video;
+        document.querySelector('#flutter-task .video').href = tasks.flutter.video;
+        document.querySelector('#sql-task .video').href = tasks.sql.video;
+        
+        // Update practice text
+        document.querySelector('#java-task .practice').textContent = 'Practice: ' + tasks.java.practice;
+        document.querySelector('#flutter-task .practice').textContent = 'Practice: ' + tasks.flutter.practice;
+        document.querySelector('#sql-task .practice').textContent = 'Practice: ' + tasks.sql.practice;
+
+        // Apply saved completion status
+        updateUI();
+
+        function toggleComplete(task) {
+            completed[task] = !completed[task];
+            saveProgress();
+            updateUI();
+        }
+
+        function saveProgress() {
+            localStorage.setItem('keshavProgress', JSON.stringify({
+                day: currentDay,
+                completed: completed,
+                lastActive: new Date().toISOString()
+            }));
+        }
+
+        function updateUI() {
+            const count = Object.values(completed).filter(v => v).length;
+            document.getElementById('completedCount').textContent = count;
+            document.getElementById('progressBar').style.width = (count / 3 * 100) + '%';
+            
+            ['java', 'flutter', 'sql'].forEach(task => {
+                const card = document.getElementById(task + '-task');
+                if (completed[task]) {
+                    card.classList.add('completed');
+                    card.querySelector('button').textContent = '✓ Completed';
+                    card.querySelector('button').style.background = '#059669';
+                } else {
+                    card.classList.remove('completed');
+                    card.querySelector('button').textContent = '✓ Mark Complete';
+                    card.querySelector('button').style.background = '#10b981';
+                }
+            });
+        }
+
+        // Navigation to change day (for testing)
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'ArrowRight' && currentDay < 5) {
+                currentDay++;
+                completed = { java: false, flutter: false, sql: false };
+                location.reload();
+            } else if (e.key === 'ArrowLeft' && currentDay > 1) {
+                currentDay--;
+                completed = { java: false, flutter: false, sql: false };
+                location.reload();
+            }
+        });
+    </script>
+</body>
+</html>
